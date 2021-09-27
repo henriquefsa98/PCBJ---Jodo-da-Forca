@@ -15,12 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject letra;
     public GameObject centro;
 
-    // TO DO: futuramente serao palavras lidas de um arquivo!
-
-    //private string palavraOculta = "";       // palavra a ser descoberta
-
     private string palavraOculta = "";
-    private string[] palavrasOcultas = new string[] {"carro", "elefante", "jogos"};
     
     private int tamanhoPalavra;              // tamanho da palavra
     char[] letrasOcultas;                    // letras ocultas
@@ -52,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    // Funcao que cria um vetor com todas as letras da palavra oculta
     void IniciaLetras()
     {
         int numLetras = palavraOculta.Length;
@@ -69,28 +65,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    // Funcao que inicia todos os games
     void InitGame()
     {
-        //palavraOculta = "Elefante";                         // palavra inicial a ser descoberta
-
-        //int indexAleatorio = Random.Range(0, palavrasOcultas.Length);
-
-        //palavraOculta = palavrasOcultas[indexAleatorio];
 
         palavraOculta = EscolhePalaravra();
 
-        Debug.Log("palavra escolhida aleatoriamente = " + palavraOculta + " !");
-
-        palavraOculta = palavraOculta.ToUpper();         // tamanho da palavra
+        palavraOculta = palavraOculta.ToUpper();      
         tamanhoPalavra = palavraOculta.Length; 
 
         letrasOcultas = new char[tamanhoPalavra];        // letras ocultas da palavra
 
         letrasDescobertas = new bool[tamanhoPalavra];    // letras descobertas da palavra
 
-        letrasOcultas = palavraOculta.ToCharArray();     //
+        letrasOcultas = palavraOculta.ToCharArray();     
     }
 
+    /* Funçao que checa se a tecla digitada pelo player esta contida na palavra, bem como 
+       se o mesmo ganhou ou perdeu o game
+    */
     void CheckTeclado()
     {
         if(Input.anyKeyDown)
@@ -122,6 +116,7 @@ public class GameManager : MonoBehaviour
                             PlayerPrefs.SetInt("score", score);
                             UpdateScore(); 
 
+                            // Verifica se o player ganhou, com base no score e no tamanho da palavra
                             if(score >= palavraOculta.Length)
                             {
                                 Debug.Log("Ganhou!");
@@ -155,17 +150,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Essa funçao atualiza o número de falhas cometidas pelo player em tela
     void UpdateNumTentativas()
     {
         GameObject.Find("numTentativas").GetComponent<Text>().text = numTentativas + " | " + maxNumTentativas;
     }
 
+    // Essa funçao atualiza o score fo player em tela
     void UpdateScore()
     {
         GameObject.Find("scoreUI").GetComponent<Text>().text = "Score " + score;
     }
 
 
+    // Essa funçao escolhe aleatorimanete uma palavra de um banco de dados em txt
     string EscolhePalaravra()
     {
         TextAsset BDPalavras = (TextAsset)Resources.Load("bancoDePalavras", typeof(TextAsset));
