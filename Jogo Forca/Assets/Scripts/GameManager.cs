@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
 
         numTentativas = 0;
 
-        maxNumTentativas = 10;
+        maxNumTentativas = (palavraOculta.Length / 2) + 1;
 
         UpdateNumTentativas();
 
@@ -97,7 +98,7 @@ public class GameManager : MonoBehaviour
             {
                 
                 numTentativas++;
-                UpdateNumTentativas();
+                bool verificaAcerto=false;
 
                 for(int i =0; i<tamanhoPalavra; i++)
                 {
@@ -108,16 +109,41 @@ public class GameManager : MonoBehaviour
                         
                         if(letrasOcultas[i] == letraTeclada)
                         {
+                        
+                            verificaAcerto = true;
                             letrasDescobertas[i] = true;
                             GameObject.Find("letra " + (i+1)).GetComponent<Text>().text = letraTeclada.ToString();
                             score = PlayerPrefs.GetInt("score");
                             score++;
                             PlayerPrefs.SetInt("score", score);
                             UpdateScore(); 
+
+                            if(score >= palavraOculta.Length)
+                            {
+                                Debug.Log("Ganhou!");
+                                Debug.Log("score = " + score);
+                                Debug.Log("tamanho da palavra = " + palavraOculta.Length);
+
+                                SceneManager.LoadScene("winScene");
+
+                            }
                         }
 
                     }
                 }
+
+                if(verificaAcerto){
+
+                    numTentativas--;
+                }
+
+                if(numTentativas > maxNumTentativas){
+
+                    SceneManager.LoadScene("gameOverScene");
+
+                }
+
+                UpdateNumTentativas();
             }
 
         }
