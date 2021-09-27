@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    private int numTentativas; // Aqui armazenamos as tentativas válidas da rodada
+    private int maxNumTentativas; // Aqui armazenamos o núm. max. de tentativas para forca (derrota) ou salvação (vitória)
+
+    int score = 0;
+
     public GameObject letra;
     public GameObject centro;
 
@@ -27,6 +33,14 @@ public class GameManager : MonoBehaviour
         InitGame();
 
         IniciaLetras();
+
+        numTentativas = 0;
+
+        maxNumTentativas = 10;
+
+        UpdateNumTentativas();
+
+        UpdateScore();
     }
 
     // Update is called once per frame
@@ -81,6 +95,10 @@ public class GameManager : MonoBehaviour
 
             if(letraTecladaComoInt >= 97 && letraTecladaComoInt <= 122)
             {
+                
+                numTentativas++;
+                UpdateNumTentativas();
+
                 for(int i =0; i<tamanhoPalavra; i++)
                 {
                     if(!letrasDescobertas[i])
@@ -92,6 +110,10 @@ public class GameManager : MonoBehaviour
                         {
                             letrasDescobertas[i] = true;
                             GameObject.Find("letra " + (i+1)).GetComponent<Text>().text = letraTeclada.ToString();
+                            score = PlayerPrefs.GetInt("score");
+                            score++;
+                            PlayerPrefs.SetInt("score", score);
+                            UpdateScore(); 
                         }
 
                     }
@@ -101,4 +123,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void UpdateNumTentativas()
+    {
+        GameObject.Find("numTentativas").GetComponent<Text>().text = numTentativas + " | " + maxNumTentativas;
+    }
+
+    void UpdateScore()
+    {
+        GameObject.Find("scoreUI").GetComponent<Text>().text = "Score " + score;
+    }
 }

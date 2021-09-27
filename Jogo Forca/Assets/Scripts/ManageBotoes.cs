@@ -21,4 +21,9 @@ public class ManageBotoes : MonoBehaviour
     {
         SceneManager.LoadScene("gameScene");
     }
+
+    public void RestartMundoGame()
+    {
+        SceneManager.LoadScene("startScene");
+    }
 }
