@@ -73,9 +73,13 @@ public class GameManager : MonoBehaviour
     {
         //palavraOculta = "Elefante";                         // palavra inicial a ser descoberta
 
-        int indexAleatorio = Random.Range(0, palavrasOcultas.Length);
+        //int indexAleatorio = Random.Range(0, palavrasOcultas.Length);
 
-        palavraOculta = palavrasOcultas[indexAleatorio];
+        //palavraOculta = palavrasOcultas[indexAleatorio];
+
+        palavraOculta = EscolhePalaravra();
+
+        Debug.Log("palavra escolhida aleatoriamente = " + palavraOculta + " !");
 
         palavraOculta = palavraOculta.ToUpper();         // tamanho da palavra
         tamanhoPalavra = palavraOculta.Length; 
@@ -139,6 +143,8 @@ public class GameManager : MonoBehaviour
 
                 if(numTentativas > maxNumTentativas){
 
+                    PlayerPrefs.SetString("ultimaPalavra", palavraOculta);
+
                     SceneManager.LoadScene("gameOverScene");
 
                 }
@@ -158,4 +164,20 @@ public class GameManager : MonoBehaviour
     {
         GameObject.Find("scoreUI").GetComponent<Text>().text = "Score " + score;
     }
+
+
+    string EscolhePalaravra()
+    {
+        TextAsset BDPalavras = (TextAsset)Resources.Load("bancoDePalavras", typeof(TextAsset));
+
+        string palavrao = BDPalavras.text;
+
+        string[] palavras = palavrao.Split(' ');
+
+        int indexAleatorio = Random.Range(0, palavras.Length-1);
+
+        return palavras[indexAleatorio];
+
+    }
+
 }

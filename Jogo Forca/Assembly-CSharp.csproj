@@ -38,6 +38,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\ManageBotoes.cs" />
+     <Compile Include="Assets\Scripts\GabaritoScript.cs" />
+     <None Include="Assets\Resources\bancoDePalavras.txt" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programas/Unity/2020.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
