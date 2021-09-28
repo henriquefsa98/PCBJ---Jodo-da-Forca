@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
 
                         letraTeclada = System.Char.ToUpper(letraTeclada);
                         
+                        // Condicional responsável pelo acerto do jogador
                         if(letrasOcultas[i] == letraTeclada)
                         {
                         
@@ -131,11 +132,13 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
+                // Condicional que reduz o numero de tentativas, no caso do jogador errar a letra sugerida
                 if(verificaAcerto){
 
                     numTentativas--;
                 }
 
+                // Condicional que verifica se o jogador perde ou não o jogo 
                 if(numTentativas > maxNumTentativas){
 
                     PlayerPrefs.SetString("ultimaPalavra", palavraOculta);

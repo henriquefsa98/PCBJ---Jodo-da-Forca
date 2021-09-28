@@ -26,4 +26,9 @@ public class ManageBotoes : MonoBehaviour
     {
         SceneManager.LoadScene("startScene");
     }
+
+    public void EndMundoGame()
+    {
+        SceneManager.LoadScene("creditScene");
+    }
 }
