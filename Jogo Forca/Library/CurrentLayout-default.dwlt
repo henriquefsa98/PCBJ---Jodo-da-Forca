@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Game
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -45,10 +45,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 678, y: 492}
-  m_MaxSize: {x: 14001, y: 14042}
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 55
+  controlID: 57
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 420
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -150,7 +150,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 101
+  controlID: 62
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 102
+  controlID: 63
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -317,22 +317,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\vazle\Documents\GitHub\PCBJ---Jogo-da-Forca\Jogo Forca
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 82420000
-    m_LastClickedID: 17026
-    m_ExpandedIDs: 000000007642000000ca9a3b
+    m_SelectedIDs: 56420000
+    m_LastClickedID: 16982
+    m_ExpandedIDs: 000000004c42000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -360,7 +360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000076420000
+    m_ExpandedIDs: 000000004c420000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -481,9 +481,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 52090000
+      m_SelectedIDs: 6e420000
       m_LastClickedID: 0
-      m_ExpandedIDs: a652ffff5a54ffff8054ffff9254ffffb656ffff0658ffff1858ffff2c58ffff3e58ffffde61ffff8e62ffffa062ffff8863ffffa063ffffbe64ffffd064ffffe264fffff464ffff0665ffff1865ffff3265ffff1a66ffff2e66ffff8485ffff2688ffff3888ffff4a88ffff6288ffff7488ffff9c88ffff668affff3a8bffff4c8bffff5e8bffff708bffff828bffff9a8bffffac8bffffbe8bffffd08bffffe48bffff9091ffffa291ffffb491ffffc691ffffda91ffffec91ffff0092ffff1492ffff6692ffff7892ffff8a92ffff9e92ffffb292ffffc492ffffd692ffffe892fffffc92ffff7293ffff8493ffff9693ffffb093ffffc493ffffd094ffffe494fffff694ffff0a95ffff1c95ffff2e95ffff4295ffffca95fffff295ffff9a97ffffac97fffffe97ffffa898ffffba98ffffce98ffffe098fffff298ffff0499ffff5299ffff5e99ffff7099ffff8499ffff9699ffff189bffffbc9bffffd09cffff9aa0ffff00a1ffff18a1ffff2aa1ffff3ea1ffff52a2ffff64a2ffff7ea2ffff90a2ffffa2a2ffffb6a2ffffc8a2ffffe0a2fffff2a2ffff08a3ffff52a4ffff64a4ffff16a5ffff62a5ffff74a5ffff16a6ffff2aa6ffff96a7ffff48a8ffff5aa8ffff6ca8ffff80a8ffff5ca9ffff70a9ffff0cabffff18abffff34abffffd4abffff48acffff50b2ffff98b2ffffaeb3ffffc2b3ffffd4b3ffffe8b3ffff20b4ffff1eb5ffff30b5ffff44b5ffff5cb5ffff86bcffff42bdffffa4c3ffffb8c3ffffcac3ffffdcc3ffffeec3ffff00c4ffff12c4fffffec6ffff10c7ffff22c7ffff34c7ffff46c7ffff58c7ffff6ac7ffff76c7ffff82c7ffff76daffffbcdaffffe2e3ffff9ef6ffff20f9ffffccfafffffc4100000642000018420000a4520000fe520000085300001a53000096560000a0560000b2560000fc5d0000065e0000405e0000e2630000ca670000846b00008e6b0000c86b0000787300008a73000082770000dc77000044790000527a0000fe7b0000e67c0000647d0000207e00007a7e0000887f00002683000038850000908500009a850000d48500007a8600002c870000168800006a8b0000768d0000608e0000e28e000024900000009300000895000098980000149c0000b49f0000f89f000020a000002aa000003ca00000caa20000d4a20000e6a2000026ab00000eac000018ac0000bcb000001cb2000026b20000
+      m_ExpandedIDs: 1cfaffff40fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
