@@ -1,19 +1,36 @@
+// **********          Universidade Federal do ABC          **********
+// ********** Programação Baseada em Componentes para Jogos **********
+// **********          Laboratório 1: Jogo da Forca         **********
+// **********                                               **********
+// **********             Componentes do Grupo:             **********
+// **********                                               **********
+// **********               Henrique Fantato                **********
+// **********                   21053916                    **********
+// **********                                               **********
+// **********                  Leonardo Vaz                 **********
+// **********                  11201811616                  **********
+// **********                                               **********
+// **********                  Santo André                  **********
+// **********                     2021                      **********
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
+    private int numTentativas; // Aqui armazenamos as tentativas válidas da rodada
+    private int maxNumTentativas; // Aqui armazenamos o núm. max. de tentativas para forca (derrota) ou salvação (vitória)
+
+    int score = 0;
+
     public GameObject letra;
     public GameObject centro;
 
-    // TO DO: futuramente serao palavras lidas de um arquivo!
-
-    //private string palavraOculta = "";       // palavra a ser descoberta
-
     private string palavraOculta = "";
-    private string[] palavrasOcultas = new string[] {"carro", "elefante", "jogos"};
     
     private int tamanhoPalavra;              // tamanho da palavra
     char[] letrasOcultas;                    // letras ocultas
@@ -27,6 +44,14 @@ public class GameManager : MonoBehaviour
         InitGame();
 
         IniciaLetras();
+
+        numTentativas = 0;
+
+        maxNumTentativas = (palavraOculta.Length / 2) + 1;
+
+        UpdateNumTentativas();
+
+        UpdateScore();
     }
 
     // Update is called once per frame
@@ -37,6 +62,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    // Funcao que cria um vetor com todas as letras da palavra oculta
     void IniciaLetras()
     {
         int numLetras = palavraOculta.Length;
@@ -54,24 +80,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    // Funcao que inicia todos os games
     void InitGame()
     {
-        //palavraOculta = "Elefante";                         // palavra inicial a ser descoberta
 
-        int indexAleatorio = Random.Range(0, palavrasOcultas.Length);
+        palavraOculta = EscolhePalaravra();
 
-        palavraOculta = palavrasOcultas[indexAleatorio];
-
-        palavraOculta = palavraOculta.ToUpper();         // tamanho da palavra
+        palavraOculta = palavraOculta.ToUpper();      
         tamanhoPalavra = palavraOculta.Length; 
 
         letrasOcultas = new char[tamanhoPalavra];        // letras ocultas da palavra
 
         letrasDescobertas = new bool[tamanhoPalavra];    // letras descobertas da palavra
 
-        letrasOcultas = palavraOculta.ToCharArray();     //
+        letrasOcultas = palavraOculta.ToCharArray();     
     }
 
+    /* Funçao que checa se a tecla digitada pelo player esta contida na palavra, bem como 
+       se o mesmo ganhou ou perdeu o game
+    */
     void CheckTeclado()
     {
         if(Input.anyKeyDown)
@@ -81,6 +109,10 @@ public class GameManager : MonoBehaviour
 
             if(letraTecladaComoInt >= 97 && letraTecladaComoInt <= 122)
             {
+                
+                numTentativas++;
+                bool verificaAcerto=false;
+
                 for(int i =0; i<tamanhoPalavra; i++)
                 {
                     if(!letrasDescobertas[i])
@@ -88,17 +120,80 @@ public class GameManager : MonoBehaviour
 
                         letraTeclada = System.Char.ToUpper(letraTeclada);
                         
+                        // Condicional responsável pelo acerto do jogador
                         if(letrasOcultas[i] == letraTeclada)
                         {
+                        
+                            verificaAcerto = true;
                             letrasDescobertas[i] = true;
                             GameObject.Find("letra " + (i+1)).GetComponent<Text>().text = letraTeclada.ToString();
+                            score = PlayerPrefs.GetInt("score");
+                            score++;
+                            PlayerPrefs.SetInt("score", score);
+                            UpdateScore(); 
+
+                            // Verifica se o player ganhou, com base no score e no tamanho da palavra
+                            if(score >= palavraOculta.Length)
+                            {
+                                Debug.Log("Ganhou!");
+                                Debug.Log("score = " + score);
+                                Debug.Log("tamanho da palavra = " + palavraOculta.Length);
+
+                                SceneManager.LoadScene("winScene");
+
+                            }
                         }
 
                     }
                 }
+
+                // Condicional que reduz o numero de tentativas, no caso do jogador errar a letra sugerida
+                if(verificaAcerto){
+
+                    numTentativas--;
+                }
+
+                // Condicional que verifica se o jogador perde ou não o jogo 
+                if(numTentativas > maxNumTentativas){
+
+                    PlayerPrefs.SetString("ultimaPalavra", palavraOculta);
+
+                    SceneManager.LoadScene("gameOverScene");
+
+                }
+
+                UpdateNumTentativas();
             }
 
         }
+    }
+
+    // Essa funçao atualiza o número de falhas cometidas pelo player em tela
+    void UpdateNumTentativas()
+    {
+        GameObject.Find("numTentativas").GetComponent<Text>().text = numTentativas + " | " + maxNumTentativas;
+    }
+
+    // Essa funçao atualiza o score fo player em tela
+    void UpdateScore()
+    {
+        GameObject.Find("scoreUI").GetComponent<Text>().text = "Score " + score;
+    }
+
+
+    // Essa funçao escolhe aleatorimanete uma palavra de um banco de dados em txt
+    string EscolhePalaravra()
+    {
+        TextAsset BDPalavras = (TextAsset)Resources.Load("bancoDePalavras", typeof(TextAsset));
+
+        string palavrao = BDPalavras.text;
+
+        string[] palavras = palavrao.Split(' ');
+
+        int indexAleatorio = Random.Range(0, palavras.Length-1);
+
+        return palavras[indexAleatorio];
+
     }
 
 }
