@@ -49,4 +49,15 @@ public class ManageBotoes : MonoBehaviour
     {
         SceneManager.LoadScene("creditScene");
     }
+
+    public void CloseTheGame()
+    {
+        Debug.Log("Fechando o jogo, até uma próxima! :D");
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+
+        #endif
+        Application.Quit();
+    }
 }
